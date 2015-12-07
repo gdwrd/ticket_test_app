@@ -11,7 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207131210) do
+ActiveRecord::Schema.define(version: 20151207151909) do
+
+  create_table "ticket_informants", force: :cascade do |t|
+    t.string   "username"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "ip_addres"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.string   "name"
+    t.string   "title"
+    t.string   "description"
+    t.integer  "status"
+    t.integer  "user_id"
+    t.integer  "ticket_informant_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

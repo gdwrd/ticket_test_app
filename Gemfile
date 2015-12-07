@@ -16,6 +16,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'simplecov'
 end
 
 group :production do
