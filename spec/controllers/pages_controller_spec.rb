@@ -1,8 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe PagesController, type: :controller do
-  it "should get response from #home page" do
-    get "home"
-    expect(response.status).to eq(200)
-  end
+  describe "should get success response" do
+    it "from #home page" do
+      get "home"
+      expect(response.status).to eq(200)
+    end
+    
+    it "from #about" do
+      get "about"
+      expect(response.status).to eq(200)
+    end
+  end  
+  
 end

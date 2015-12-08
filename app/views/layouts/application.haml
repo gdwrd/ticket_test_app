@@ -1,0 +1,50 @@
+!!!
+%html
+  %head
+    %title Workspace
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %nav.navbar.navbar-default
+      .container
+        / Brand and toggle get grouped for better mobile display
+        .navbar-header
+          %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{:href => "#"} Ticket App
+        / Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li.active
+              %a{:href => "/"}
+                Home
+                %span.sr-only (current)
+            %li
+              %a{:href => "/tickets/my"} My Tickets
+          %ul.nav.navbar-nav.navbar-right
+            - if current_user.nil?
+              %li
+                %a{:href => "/users/sign_up"} Sign Up
+              %li  
+                %a{:href => "/users/sign_in"} Sign In
+            - else
+              %li.dropdown
+                %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                  User
+                  %span.caret
+                %ul.dropdown-menu
+                  %li
+                    %a{:href => "#"} Action
+                  %li
+                    %a{:href => "#"} Another action
+                  %li
+                    %a{:href => "#"} Something else here
+                  %li.divider{:role => "separator"}
+                  %li
+                    %a{:href => "#"} Separated link
+    .container
+      = yield

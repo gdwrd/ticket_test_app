@@ -1,7 +1,7 @@
 require 'simplecov'
 require 'capybara/rspec'
 
-SimpleCov.start
+SimpleCov.start 'rails'
 
 RSpec.configure do |config|
   

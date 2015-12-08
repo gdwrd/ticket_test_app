@@ -5,12 +5,13 @@ FactoryGirl.define do
     
     factory :user_with_tickets do
       
+      
       transient do
         tickets_count 5
       end
       
       after(:create) do |user, evaluator|
-        create_list(:ticket, evaluator.tickets_count, user: user)
+        create_list(:ticket_with_status_2, evaluator.tickets_count, user: user)
       end
     end
   end

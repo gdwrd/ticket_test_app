@@ -7,4 +7,8 @@ RSpec.describe User, type: :model do
     expect(user.tickets.blank?).to equal(true)
   end
   
+  it "should create user with tickets" do
+    user = FactoryGirl.create(:user_with_tickets)
+    expect(user.tickets.last.ticket_informant).not_to eq(nil)
+  end
 end
