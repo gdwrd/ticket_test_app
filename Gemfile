@@ -11,6 +11,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'devise'
+gem 'haml-rails'
 
 group :development, :test do
   gem 'pry-rails'
@@ -18,6 +19,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'simplecov'
+  gem 'rubocop', require: false
+  gem 'capybara'
+  gem 'rails_best_practices'
 end
 
 group :production do
