@@ -34,7 +34,7 @@
             - else
               %li.dropdown
                 %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-                  = current_user.email
+                  = current_user && current_user.email
                   %span.caret
                 %ul.dropdown-menu
                   %li
@@ -45,6 +45,8 @@
                     %a{:href => "#"} My Comments
                   %li.divider{:role => "separator"}
                   %li
-                    = link_to "Sign Out", destroy_user_session_path
+                    = link_to 'Profile Settings', edit_user_registration_path
+                  %li
+                    = link_to "Sign Out", destroy_user_session_path, method: :delete
     .container
       = yield
