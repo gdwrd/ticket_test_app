@@ -4,32 +4,44 @@ RSpec.describe TicketsController, type: :controller do
   include Devise::TestHelpers
   
   describe "should not get success response" do
-    before(:each) do
-      Capybara.reset_sessions!
+    let(:ticket) { FactoryGirl.create(:ticket) }
+    
+    it "should have access to #new" do
+      get 'new'
+      expect(response).to render_template(:new)
+      expect(response.status).to eq(200)
+    end
+    
+    it "should have access to #create" do
+      post "create", ticket: ticket
+      expect(response.status).to eq(201)
+      expect(response).to redirect_to(ticket_url(assign(ticket)))
+      expect(response.body).to has_content(ticket.title)
     end
     
     it "shouldn't request success to #index" do
       get 'index'
       expect(response.status).to eq(302)
-      expect(page.current_url).to eq(new_user_session_url)
+      expect(response).to redirect_to(new_user_session_url)
     end
     
     it "shouldn't request success to #edit" do
       get 'edit'
       expect(response.status).to eq(302)
-      expect(page.current_url).to eq(new_user_session_url)
+      expect(response).to redirect_to(new_user_session_url)
     end
     
     it "shouldn't request success to #update" do
-      post 'update', ticket: ticket
+      patch 'update', id: ticket.id, ticket: { title: "Changed Ticket Title" }
       expect(response.status).to eq(302)
-      expect(page.current_url).to eq(new_user_session_url)
+      expect(response).to redirect_to(new_user_session_url)
+      expect(response.body).to has_content("Changed Ticket Title")
     end
     
     it "shouldn't request success to #delete" do
       delete 'destroy', id: ticket.id
       expect(response.status).to eq(302)
-      expect(page.current_url).to eq(new_user_session_url)
+      expect(response).to redirect_to(new_user_session_url)
     end
   end
   
@@ -44,21 +56,20 @@ RSpec.describe TicketsController, type: :controller do
     it "from #index" do
       get "index"
       expect(response.status).to eq(200)
-    end
-    
-    it "from #new" do
-      get "new"
-      expect(response.status).to eq(200)
+      expect(response).to render_template(:index)
+      expect(response.body).to has_content("All tickets")
     end
     
     it "from #show" do
       get "show", id: ticket.id
       expect(response.status).to eq(200)
+      expect(response.body).to has_content(ticket.title)
     end
     
     it "from #edit" do
       get "edit", id: ticket.id
       expect(response.status).to eq(200)
+      expect(response.body).to has_content(ticket.title)
     end
   end
 end

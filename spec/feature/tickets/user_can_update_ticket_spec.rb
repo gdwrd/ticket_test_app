@@ -1,19 +1,15 @@
 require 'rails_helper'
 
 feature 'User can update ticket' do
-  
   given!(:ticket) { FactoryGirl.create(:ticket) }
-  given!(:user) { FactoryGirl.create(:ticket) }
+  given!(:user) { FactoryGirl.create(:user) }
   
   before(:each) do
-    visit "/users/sign_in"
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Sign in'
+    sign_in_with(user.email, user.password)
   end
   
   scenario "and change status" do
-    visit "/tickets", id: ticket.id
+    visit "/tickets/#{ticket.id}"
     select("WAITING FOR STAFF RESPONSE", from: "ticket_status")
     click_button "update_ticket"
     expect(page.status_code).to eq(200)
@@ -22,7 +18,7 @@ feature 'User can update ticket' do
   end
   
   scenario "assign to user, from #show" do
-    visit "/tickets", id: ticket.id
+    visit "/tickets/#{ticket.id}"
     click_button "Assing to Me"
     expect(page.status_code).to eq(200)
     expect(page.current_url).to eq(ticket_url(ticket.id))
@@ -30,7 +26,7 @@ feature 'User can update ticket' do
   end
   
   scenario "close ticket from #show" do
-    visit "/tickets", id: ticket.id
+    visit "/tickets/#{ticket.id}"
     click_button "Close Ticket"
     expect(page.status_code).to eq(200)
     expect(page.current_url).to eq(tickets_url)

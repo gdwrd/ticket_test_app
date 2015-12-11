@@ -9,5 +9,6 @@ class Ticket < ActiveRecord::Base
   validates :description, presence: true
   validates :status, presence: true
   validates_associated :ticket_informant
+  
   scope :open, -> { Ticket.where(status: 1) }
 end
