@@ -6,4 +6,10 @@ module TicketsHelper
   def rand_hex
     SecureRandom.hex(1)
   end
+  
+  def tickets_panel(tickets, scope_name)
+    @tickets = tickets
+    @scope = scope_name
+    render :partial => "tickets_panel"
+  end
 end

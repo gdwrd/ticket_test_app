@@ -11,4 +11,8 @@ class Ticket < ActiveRecord::Base
   validates_associated :ticket_informant
   
   scope :open, -> { Ticket.where(status: 1) }
+  scope :with_response, -> { Ticket.where(status: 2) }
+  scope :hold, -> { Ticket.where(status: 3) }
+  scope :canceled, -> { Ticket.where(status: 4) }
+  scope :completed, -> { Ticket.where(status: 5) }
 end

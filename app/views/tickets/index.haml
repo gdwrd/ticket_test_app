@@ -1,0 +1,6 @@
+.col-md-8.col-md-offset-2.col-xs-12
+  = tickets_panel @data[:open], 'Open'
+  = tickets_panel @data[:with_response], 'With Response'
+  = tickets_panel @data[:hold], 'Hold'
+  = tickets_panel @data[:canceled], 'Canceled'
+  = tickets_panel @data[:completed], 'Completed'

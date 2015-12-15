@@ -1,0 +1,19 @@
+.col-md-8.col-md-offset-2.col-xs-12
+  .alert.alert-info
+    Hi friend, here you can create a ticket, just type you `name` , `email` and information about your problem!
+  = form_for @ticket_form, url: tickets_path do |t|
+    - if @ticket_form.errors.any?
+      .alert.alert-danger
+        %ul
+          - @ticket_form.errors.full_messages.each do |msg|
+            %li= msg
+    .form-group
+      = t.text_field :title, class: 'form-control', placeholder: 'Ticket title'
+    .form-group
+      = t.email_field :email, class: 'form-control', placeholder: 'Email'
+    .form-group
+      = t.text_field :username, class: 'form-control', placeholder: 'User name'
+    .form-group
+      = t.text_area :description, class: 'form-control', placeholder: 'Enter here ticket description'
+    .form-group
+      = t.submit 'Create ticket', class: 'btn btn-info'

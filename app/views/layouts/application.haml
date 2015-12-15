@@ -15,37 +15,27 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.navbar-brand{:href => "#"} Ticket App
+          %a.navbar-brand{:href => "/"} Ticket App
         / Collect the nav links, forms, and other content for toggling
         #bs-example-navbar-collapse-1.collapse.navbar-collapse
           %ul.nav.navbar-nav
-            %li.active
-              %a{:href => "/"}
-                Home
-                %span.sr-only (current)
-            %li
-              %a{:href => "/tickets/my"} My Tickets
+            = header_link tickets_path, "Tickets"
+            = header_link new_ticket_path, "Create Ticket"
           %ul.nav.navbar-nav.navbar-right
             - if current_user.nil?
-              %li
-                = link_to "Sign Up", new_user_registration_path
-              %li  
-                = link_to "Sign In", new_user_session_path
+              = header_link new_user_registration_path, "Sign Up"
+              = header_link new_user_session_path, "Sign In"
             - else
               %li.dropdown
                 %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
                   = current_user && current_user.email
                   %span.caret
                 %ul.dropdown-menu
-                  %li
-                    %a{:href => "#"} Tickets
-                  %li
-                    %a{:href => "#"} My Open Tickets
-                  %li
-                    %a{:href => "#"} My Comments
+                  = header_link tickets_path, 'Tickets'
+                  = header_link "#", 'My Ticket'
+                  = header_link "#", 'My Comments'
                   %li.divider{:role => "separator"}
-                  %li
-                    = link_to 'Profile Settings', edit_user_registration_path
+                  = header_link edit_user_registration_path, 'Profile Settings'
                   %li
                     = link_to "Sign Out", destroy_user_session_path, method: :delete
     .container

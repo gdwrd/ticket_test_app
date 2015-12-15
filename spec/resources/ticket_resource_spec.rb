@@ -1,6 +1,6 @@
 require './app/resources/tickets_resources.rb'
 
-describe TicketsResouces do
+describe TicketsResources do
   describe "create ticket and ticket_informant objects" do
     let(:ticket) { FactoryGirl.create(:ticket) }
     let(:ticket_informant) { FactoryGirl.create(:ticket_informant) }
@@ -12,7 +12,15 @@ describe TicketsResouces do
         email: ticket_informant.email
       }
     }
-    let(:tickets_resources) { TicketsResouces.new(ticket_untreated) }
+    let(:ticket_untreated_empty) {
+      {
+        title: '',
+        description: '',
+        username: '',
+        email: ''
+      }
+    }
+    let(:tickets_resources) { TicketsResources.new(ticket_untreated) }
     
     it "and should get existing resources by ticket id" do
       tickets_resources.setup_resource(ticket.id)
@@ -25,19 +33,18 @@ describe TicketsResouces do
       tickets_resources.destroy
       # expect(tickets_resources.ticket).to eq(nil)
       # expect(tickets_resources.ticket_informant).to eq(nil)
-      binding.pry
       expect(Ticket.where(id: ticket.id)).to raise_exception(ActiveRecord::RecordNotFound)
       expect(TicketInformant.find(ticket_informant.id)).to raise_exception(ActiveRecord::RecordNotFound)
     end
     
     it "and should get ticket by id" do
-      expect(TicketsResouces.get_ticket(ticket.id)).to eq(ticket)
+      expect(TicketsResources.get_ticket(ticket.id)).to eq(ticket)
     end
     
     it "and should create new resource" do
       expect(tickets_resources.data).to eq(ticket_untreated)
-      expect(tickets_resources.ticket).to eq(nil)
-      expect(tickets_resources.ticket_informant).to eq(nil)
+      expect(tickets_resources.ticket).not_to eq(nil)
+      expect(tickets_resources.ticket_informant).not_to eq(nil)
     end
     
     it "and should separate data" do
@@ -77,6 +84,12 @@ describe TicketsResouces do
       expect(tickets_resources.ticket.name).not_to eq(nil)
       expect(Ticket.last.title).to eq(ticket.title)
       expect(TicketInformant.last).to eq(ticket_informant)
+    end
+    
+    it "and should return errors if ticket empty" do
+      tickets_resources = TicketsResources.new(ticket_untreated_empty)
+      expect(tickets_resources.valid?).to eq(false)
+      expect(tickets_resources.errors).not_to eq(nil)
     end
   end
 end

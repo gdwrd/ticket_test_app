@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   resources :tickets
   
   root "pages#home"
+  get "about", to: "pages#about"
 end

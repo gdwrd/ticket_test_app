@@ -1,0 +1,15 @@
+- if @tickets.any?
+  .panel.panel-default
+    .panel-heading 
+      %h3 
+        = @scope
+        | 
+        = @tickets.length
+    %table.table.table-hover.tickets-table
+      %tbody
+        - @tickets.each do |element|
+          %tr
+            %td= element.name
+            %td= element.title
+            %td= link_to 'Show', element, class: 'btn btn-info'
+            %td= link_to 'Assign', edit_ticket_path(element), class: 'btn btn-success'
