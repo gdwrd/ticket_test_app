@@ -30,12 +30,6 @@ RSpec.describe TicketsController, type: :controller do
       expect(response).to redirect_to(new_user_session_url)
     end
     
-    it "shouldn't request success to #edit" do
-      get 'edit'
-      expect(response.status).to eq(302)
-      expect(response).to redirect_to(new_user_session_url)
-    end
-    
     it "shouldn't request success to #update" do
       patch 'update', id: ticket.id, ticket: { title: "Changed Ticket Title" }
       expect(response.status).to eq(302)
@@ -65,11 +59,6 @@ RSpec.describe TicketsController, type: :controller do
     
     it "from #show" do
       get "show", id: ticket.id
-      expect(response.status).to eq(200)
-    end
-    
-    it "from #edit" do
-      get "edit", id: ticket.id
       expect(response.status).to eq(200)
     end
   end

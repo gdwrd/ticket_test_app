@@ -1,0 +1,6 @@
+.panel.panel-warning
+  .panel-heading
+    %h4 Ticket Actions
+  .panel-body
+    %h5 You can Assign ticket to your account
+    = button_to "Assign", update_ticket_status_path(@ticket.id, 2), method: :patch, class: 'btn btn-success'

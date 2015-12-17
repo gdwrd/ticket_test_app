@@ -19,10 +19,10 @@ feature 'User can update ticket' do
   
   scenario "assign to user, from #show" do
     visit "/tickets/#{ticket.id}"
-    click_button "Assing to Me"
+    click_button "Assign"
     expect(page.status_code).to eq(200)
-    expect(page.current_url).to eq(ticket_url(ticket.id))
-    expect(Ticket.find(ticket.id).user).not_to eq(nil)
+    expect(page.current_url).to eq(tickets_url)
+    expect(Ticket.find(ticket.id).user.nil?).to eq(false)
   end
   
   scenario "close ticket from #show" do
@@ -35,9 +35,9 @@ feature 'User can update ticket' do
   
   scenario "assign to user, from #index" do
     visit "/tickets"
-    click_button "assign_#{ticket.id}"
+    click_button "Assign"
     expect(page.status_code).to eq(200)
-    expect(page.current_url).to eq(ticket_url(ticket.id))
-    expect(Ticket.find(ticket.id).user).not_to eq(nil)
+    expect(page.current_url).to eq(tickets_url)
+    expect(Ticket.find(ticket.id).user.nil?).to eq(false)
   end
 end

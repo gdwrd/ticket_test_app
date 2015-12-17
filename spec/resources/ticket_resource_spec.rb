@@ -2,6 +2,7 @@ require './app/resources/tickets_resources.rb'
 
 describe TicketsResources do
   describe "create ticket and ticket_informant objects" do
+    let(:user) { FactoryGirl.create(:user) }
     let(:ticket) { FactoryGirl.create(:ticket) }
     let(:ticket_informant) { FactoryGirl.create(:ticket_informant) }
     let(:ticket_untreated) { 
@@ -21,6 +22,7 @@ describe TicketsResources do
       }
     }
     let(:tickets_resources) { TicketsResources.new(ticket_untreated) }
+    let(:update_ticket_params) { { status: 2 } }
     
     it "and should get existing resources by ticket id" do
       tickets_resources.setup_resource(ticket.id)
@@ -90,6 +92,12 @@ describe TicketsResources do
       tickets_resources = TicketsResources.new(ticket_untreated_empty)
       expect(tickets_resources.valid?).to eq(false)
       expect(tickets_resources.errors).not_to eq(nil)
+    end
+    
+    it "Update ticekt: should change status" do
+      tickets_resources.update(update_ticket_params, user.id)
+      expect(tickets_resources.ticket.status).to eq(2)
+      expect(tickets_resources.ticket.user.nil?).to eq(false)
     end
   end
 end

@@ -10,7 +10,7 @@ class TicketsResources
     @ticket = ticket
     @ticket_informant = ticket_informant
     @errors = nil
-    separate_data
+    separate_data if !@data.nil?
   end
   
   def self.tickets
@@ -35,8 +35,12 @@ class TicketsResources
   def save
     set_default_status
     generate_name_attribute
-    return true if @ticket.save
-    false
+    true if @ticket.save
+  end
+  
+  def update(ticket_params, user_id)
+    assign_to_current_user(user_id) if @ticket.user.nil?
+    @ticket.update(ticket_params)
   end
   
   def separate_data
@@ -70,6 +74,10 @@ class TicketsResources
   end
   
   private
+  
+  def assign_to_current_user(user_id)
+    @ticket.user_id = user_id
+  end
   
   def set_default_status
     set_waiting_response_status

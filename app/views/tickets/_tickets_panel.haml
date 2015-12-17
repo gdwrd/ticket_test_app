@@ -12,4 +12,4 @@
             %td= element.name
             %td= element.title
             %td= link_to 'Show', element, class: 'btn btn-info'
-            %td= link_to 'Assign', edit_ticket_path(element), class: 'btn btn-success'
+            %td= button_to "Assign", update_ticket_status_path(element.id, 2), method: :patch, class: 'btn btn-success'
