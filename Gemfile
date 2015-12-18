@@ -23,6 +23,9 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'capybara'
   gem 'rails_best_practices'
+  gem 'guard'
+  gem 'guard-rspec', require: false
+  gem 'puma'
 end
 
 group :production do

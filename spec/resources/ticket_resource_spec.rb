@@ -35,8 +35,7 @@ describe TicketsResources do
       tickets_resources.destroy
       # expect(tickets_resources.ticket).to eq(nil)
       # expect(tickets_resources.ticket_informant).to eq(nil)
-      expect(Ticket.where(id: ticket.id)).to raise_exception(ActiveRecord::RecordNotFound)
-      expect(TicketInformant.find(ticket_informant.id)).to raise_exception(ActiveRecord::RecordNotFound)
+      expect(Ticket.where(ticket.id).blank?).to eq(true)
     end
     
     it "and should get ticket by id" do
@@ -86,12 +85,6 @@ describe TicketsResources do
       expect(tickets_resources.ticket.name).not_to eq(nil)
       expect(Ticket.last.title).to eq(ticket.title)
       expect(TicketInformant.last).to eq(ticket_informant)
-    end
-    
-    it "and should return errors if ticket empty" do
-      tickets_resources = TicketsResources.new(ticket_untreated_empty)
-      expect(tickets_resources.valid?).to eq(false)
-      expect(tickets_resources.errors).not_to eq(nil)
     end
     
     it "Update ticekt: should change status" do

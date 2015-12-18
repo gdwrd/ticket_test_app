@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
   before_action :authenticate_user!, except: [ :new, :create, :show ]
-  before_action :set_ticket, only: [:show, :edit, :update]
+  before_action :set_tickets_resources, only: [:show, :edit, :update, :destroy]
   
   def index
     @data = TicketsResources.tickets
@@ -25,9 +25,12 @@ class TicketsController < ApplicationController
   end
   
   def update
-    @tickets_resources = TicketsResources.new
-    @tickets_resources.setup_resource(@ticket.id)
     @tickets_resources.update(ticket_params, current_user.id)
+    redirect_to tickets_path
+  end
+  
+  def destroy
+    @tickets_resources.destroy
     redirect_to tickets_path
   end
   
@@ -37,7 +40,9 @@ class TicketsController < ApplicationController
     params.require(:ticket_form).permit(:title, :description, :username, :email, :status)
   end
   
-  def set_ticket
-    @ticket = TicketsResources.get_ticket(params[:id])
+  def set_tickets_resources
+    @tickets_resources = TicketsResources.new
+    @tickets_resources.setup_resource(params[:id])
+    @ticket = @tickets_resources.ticket
   end
 end

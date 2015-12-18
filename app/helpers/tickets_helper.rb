@@ -42,7 +42,7 @@ module TicketsHelper
     when 1, 2
       "label-info"
     when 3
-      "lable-default"
+      "label-default"
     when 4
       "label-danger"
     else

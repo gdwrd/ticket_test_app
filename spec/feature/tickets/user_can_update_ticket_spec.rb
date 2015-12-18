@@ -8,15 +8,6 @@ feature 'User can update ticket' do
     sign_in_with(user.email, user.password)
   end
   
-  scenario "and change status" do
-    visit "/tickets/#{ticket.id}"
-    select("WAITING FOR STAFF RESPONSE", from: "ticket_status")
-    click_button "update_ticket"
-    expect(page.status_code).to eq(200)
-    expect(page.current_url).to eq(ticket_url(ticket.id))
-    expect(Ticket.find(ticket.id).status).to eq(2)
-  end
-  
   scenario "assign to user, from #show" do
     visit "/tickets/#{ticket.id}"
     click_button "Assign"
@@ -25,9 +16,33 @@ feature 'User can update ticket' do
     expect(Ticket.find(ticket.id).user.nil?).to eq(false)
   end
   
-  scenario "close ticket from #show" do
+  scenario "cancel ticket from #show" do
     visit "/tickets/#{ticket.id}"
-    click_button "Close Ticket"
+    click_button "Canceled"
+    expect(page.status_code).to eq(200)
+    expect(page.current_url).to eq(tickets_url)
+    expect(Ticket.find(ticket.id).status).to eq(4)
+  end
+  
+  scenario "hold ticket from #show" do
+    visit "/tickets/#{ticket.id}"
+    click_button "Hold"
+    expect(page.status_code).to eq(200)
+    expect(page.current_url).to eq(tickets_url)
+    expect(Ticket.find(ticket.id).status).to eq(3)
+  end
+  
+  scenario "complete ticket from #show" do
+    visit "/tickets/#{ticket.id}"
+    click_button "Delete"
+    expect(page.status_code).to eq(200)
+    expect(page.current_url).to eq(tickets_url)
+    expect(Ticket.where(ticket.id).blank?).to eq(true)
+  end
+  
+  scenario "complete ticket from #show" do
+    visit "/tickets/#{ticket.id}"
+    click_button "Complete"
     expect(page.status_code).to eq(200)
     expect(page.current_url).to eq(tickets_url)
     expect(Ticket.find(ticket.id).status).to eq(5)
