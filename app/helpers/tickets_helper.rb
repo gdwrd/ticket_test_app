@@ -18,7 +18,7 @@ module TicketsHelper
   def tickets_panel(tickets, scope_name)
     @tickets = tickets
     @scope = scope_name
-    render :partial => "tickets_panel"
+    render "tickets_panel", tickets: @tickets, scope: @scope
   end
   
   def update_ticket_status_path(id, status)
@@ -52,7 +52,7 @@ module TicketsHelper
   
   def user_actions
     if !current_user.nil?
-      render :partial => 'action_block'
+      render 'action_block', ticket: @ticket
     end
   end
 end

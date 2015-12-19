@@ -1,1 +1,14 @@
-#h1 Hello this is Home Page
+#h1 Last added tickets
+  .panel.panel-default
+    .panel-heading
+      %h2 Recent Tickets
+    %table.table
+      = recent.each do |item|
+        %tr
+          %td
+            = item.name
+          %td
+            = item.title
+          %td
+            = link_to 'Show', item, class: 'btn btn-xs btn-info'
+          

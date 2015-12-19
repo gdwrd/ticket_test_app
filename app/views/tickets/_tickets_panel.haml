@@ -1,15 +1,15 @@
-- if @tickets.any?
+- if !tickets.nil? && tickets.any?
   .panel.panel-default
     .panel-heading 
-      %h3 
-        = @scope
-        | 
-        = @tickets.length
+      %h5 
+        = scope
     %table.table.table-hover.tickets-table
       %tbody
-        - @tickets.each do |element|
+        - tickets.each do |element|
           %tr
-            %td= element.name
-            %td= element.title
-            %td= link_to 'Show', element, class: 'btn btn-info'
-            %td= button_to "Assign", update_ticket_status_path(element.id, 2), method: :patch, class: 'btn btn-success'
+            %td
+              %small= element.name
+            %td
+              %small= element.title
+            %td= link_to 'Show', element, class: 'btn btn-xs btn-info'
+            %td= button_to "Assign", update_ticket_status_path(element.id, 2), method: :patch, class: 'btn btn-xs btn-success'

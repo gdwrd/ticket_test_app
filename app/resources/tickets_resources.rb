@@ -73,6 +73,14 @@ class TicketsResources
     @ticket.status = 5
   end
   
+  def self.method_missing(name, *args, &block)
+    Ticket.send name, *args, &block
+  end
+  
+  def self.respond_to?(name, include_private = false)
+    Ticket.methods.include? name || super
+  end
+  
   private
   
   def assign_to_current_user(user_id)
