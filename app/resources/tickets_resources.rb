@@ -53,26 +53,6 @@ class TicketsResources
     @ticket.destroy!
   end
   
-  def set_waiting_response_status
-    @ticket.status = 1
-  end
-  
-  def set_waiting_customer_status
-    @ticket.status = 2
-  end
-  
-  def set_on_hold_status
-    @ticket.status = 3
-  end
-  
-  def set_cancel_status
-    @ticket.status = 4
-  end
-  
-  def set_complete_status
-    @ticket.status = 5
-  end
-  
   def self.method_missing(name, *args, &block)
     Ticket.send name, *args, &block
   end
@@ -88,7 +68,7 @@ class TicketsResources
   end
   
   def set_default_status
-    set_waiting_response_status
+    @ticket.status = 1
   end
   
   def generate_name_attribute

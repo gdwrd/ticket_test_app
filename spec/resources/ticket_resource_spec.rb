@@ -59,24 +59,6 @@ describe TicketsResources do
       expect(ticket_informant.username).to eq(tickets_resources.data[:username])
     end
     
-    it "should change status" do
-      tickets_resources.save
-      tickets_resources.set_waiting_response_status
-      expect(tickets_resources.ticket.status).to eq(1)
-      
-      tickets_resources.set_waiting_customer_status
-      expect(tickets_resources.ticket.status).to eq(2)
-      
-      tickets_resources.set_on_hold_status
-      expect(tickets_resources.ticket.status).to eq(3)
-      
-      tickets_resources.set_cancel_status
-      expect(tickets_resources.ticket.status).to eq(4)
-      
-      tickets_resources.set_complete_status
-      expect(tickets_resources.ticket.status).to eq(5)
-    end
-    
     it "and should save separate information, and generate name and status to db" do
       tickets_resources.save
       ticket = tickets_resources.ticket
