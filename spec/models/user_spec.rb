@@ -11,4 +11,11 @@ RSpec.describe User, type: :model do
     user = FactoryGirl.create(:user_with_tickets)
     expect(user.tickets.last.ticket_informant).not_to eq(nil)
   end
+
+  it "should destroy users tickets" do
+    user = FactoryGirl.create(:user_with_tickets)
+    last_ticket = user.tickets.last
+    user.destroy
+    expect(Ticket.where(last_ticket.id).blank?).to eq(true)
+  end
 end

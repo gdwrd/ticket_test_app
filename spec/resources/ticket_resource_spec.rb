@@ -75,4 +75,9 @@ describe TicketsResources do
       expect(tickets_resources.ticket.user.nil?).to eq(false)
     end
   end
+
+  describe "accessing to Ticket scopes:" do
+    it { expect(TicketsResources.respond_to? :recent) }
+    it { expect(TicketsResources.respond_to? :updated) }
+  end
 end
