@@ -5,11 +5,14 @@
         = scope
     %table.table.table-hover.tickets-table
       %tbody
-        - tickets.each do |element|
+        - tickets.each do |item|
           %tr
             %td
-              %small= element.name
+              %small= item.name
             %td
-              %small= element.title
-            %td= link_to 'Show', element, class: 'btn btn-xs btn-info'
-            %td= button_to "Assign", update_ticket_status_path(element.id, 2), method: :patch, class: 'btn btn-xs btn-success'
+              %small= item.title
+            %td.actions= link_to 'Show', item, class: 'btn btn-xs btn-info'
+            - if item.user.nil?
+              %td.actions= button_to "Assign", update_ticket_status_path(item.id, 2), method: :patch, class: 'btn btn-xs btn-success'
+            - else
+              %td.actions= button_to "Unassign", update_ticket_status_path(item.id, 1), method: :patch, class: 'btn btn-xs btn-warning'

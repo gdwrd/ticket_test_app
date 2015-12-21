@@ -1,7 +1,8 @@
-#h2 Last added tickets
+%h2 Last added tickets
+%br
 .panel.panel-default
   .panel-heading
-    %h2 Recent Tickets
+    %h4 Recent Tickets
   %table.table.table-hover
     - @recent.each do |item|
       %tr
@@ -9,6 +10,6 @@
           = item.name
         %td
           = item.title
-        %td
+        %td.actions
           = link_to 'Show', item, class: 'btn btn-xs btn-info'
           
