@@ -12,4 +12,18 @@
           = item.title
         %td.actions
           = link_to 'Show', item, class: 'btn btn-xs btn-info'
+
+.panel.panel-default
+  .panel-heading
+    %h4 Last Updated
+  %table.table.table-hover
+    - @updated.each do |item|
+      %tr
+        %td
+          = item.name
+        %td
+          = item.title
+        %td.actions
+          = link_to 'Show', item, class: 'btn btn-xs btn-info'
+
           
