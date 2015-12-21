@@ -3,11 +3,15 @@
 }
 
 .common-container {
-  height: calc( 100vh - 72px );
+  min-height: calc( 100vh - 72px );
   display: flex;
   align-items: center;
 }
 
 body {
   font-family: 'Quicksand', sans-serif !important;
+}
+
+.tickets_show {
+  padding: 0 !important;
 }
