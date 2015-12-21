@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature "User can" do
-  given!(:ticket) { FactoryGirl.create(:ticket) }
+  given!(:ticket) { FactoryGirl.build(:ticket) }
   given!(:user) { FactoryGirl.create(:user) }
   
   before(:each) do

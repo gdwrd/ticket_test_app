@@ -12,18 +12,6 @@ RSpec.describe TicketsController, type: :controller do
       expect(response.status).to eq(200)
     end
     
-    it "to #create" do
-      post "create", { ticket_form: { 
-          title: ticket.title, 
-          description: ticket.description, 
-          username: ticket.ticket_informant.username, 
-          email: ticket.ticket_informant.email
-        } 
-      }
-      expect(response.status).to eq(302)
-      expect(response).to redirect_to(ticket_url(ticket.id + 1))
-    end
-    
     it "shouldn't request success to #index" do
       get 'index'
       expect(response.status).to eq(302)
@@ -58,7 +46,7 @@ RSpec.describe TicketsController, type: :controller do
     end
     
     it "from #show" do
-      get "show", id: ticket.id
+      get "show", id: ticket.slug
       expect(response.status).to eq(200)
     end
   end

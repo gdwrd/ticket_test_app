@@ -2,18 +2,16 @@
   .panel-heading
     %h4 Ticket Actions
   .panel-body
-    %h5 You can Assign/Unassign ticket to your account
     - if ticket.user.nil?
-      = button_to "Assign", update_ticket_status_path(ticket.id, 2), method: :patch, class: 'btn btn-success'
-    - else
-      = button_to "Unassign", update_ticket_status_path(ticket.id, 1), method: :patch, class: 'btn btn-warning'
+      %h5 You can Assign/Unassign ticket to your account
+      = button_to "Assign", update_ticket_status_path(ticket.slug, 2), method: :patch, class: 'btn btn-success'
     %h5 You can check as Complete status
-    = button_to "Complete", update_ticket_status_path(ticket.id, 5), method: :patch, class: 'btn btn-info'
+    = button_to "Complete", update_ticket_status_path(ticket.slug, 5), method: :patch, class: 'btn btn-info'
     %h5 You can check as Canceled status
-    = button_to "Canceled", update_ticket_status_path(ticket.id, 4), method: :patch, class: 'btn btn-danger'
+    = button_to "Canceled", update_ticket_status_path(ticket.slug, 4), method: :patch, class: 'btn btn-danger'
     %h5 You can check as On Hold status
-    = button_to "Hold", update_ticket_status_path(ticket.id, 3), method: :patch, class: 'btn btn-default'
+    = button_to "Hold", update_ticket_status_path(ticket.slug, 3), method: :patch, class: 'btn btn-default'
   .panel-footer  
     .alert.alert-danger
       %h5 You can `Delete` this ticket
-      = button_to "Delete", ticket_path(ticket.id), method: :delete, class: 'btn btn-danger'
+      = button_to "Delete", ticket_path(ticket.slug), method: :delete, class: 'btn btn-danger'

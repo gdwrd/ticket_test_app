@@ -4,11 +4,12 @@ describe TicketsResources do
   describe "create ticket and ticket_informant objects" do
     let(:user) { FactoryGirl.create(:user) }
     let(:ticket) { FactoryGirl.create(:ticket) }
+    let(:ticket_unsaved) { FactoryGirl.build(:ticket) }
     let(:ticket_informant) { FactoryGirl.create(:ticket_informant) }
     let(:ticket_untreated) { 
       {
-        title: ticket.title,
-        description: ticket.description,
+        title: ticket_unsaved.title,
+        description: ticket_unsaved.description,
         username: ticket_informant.username,
         email: ticket_informant.email
       }
@@ -25,13 +26,13 @@ describe TicketsResources do
     let(:update_ticket_params) { { status: 2 } }
     
     it "and should get existing resources by ticket id" do
-      tickets_resources.setup_resource(ticket.id)
+      tickets_resources.setup_resource(ticket.slug)
       expect(tickets_resources.ticket).to eq(ticket)
       expect(tickets_resources.ticket_informant).to eq(ticket.ticket_informant)
     end
     
     it "and should destroy resource" do
-      tickets_resources.setup_resource(ticket.id)
+      tickets_resources.setup_resource(ticket.slug)
       tickets_resources.destroy
       # expect(tickets_resources.ticket).to eq(nil)
       # expect(tickets_resources.ticket_informant).to eq(nil)
@@ -39,7 +40,7 @@ describe TicketsResources do
     end
     
     it "and should get ticket by id" do
-      expect(TicketsResources.get_ticket(ticket.id)).to eq(ticket)
+      expect(TicketsResources.get_ticket(ticket.slug)).to eq(ticket)
     end
     
     it "and should create new resource" do
