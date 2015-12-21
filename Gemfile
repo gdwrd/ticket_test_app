@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'devise'
 gem 'haml-rails'
 gem 'virtus'
+gem 'friendly_id', '~> 5.1'
 
 group :development, :test do
   gem 'pry-rails'

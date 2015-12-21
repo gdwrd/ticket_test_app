@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature "Guest can create ticket" do
-  given!(:ticket) { FactoryGirl.create(:ticket) }
+  given!(:ticket) { FactoryGirl.build(:ticket) }
   
   scenario "with valid fields" do
     visit "/tickets/new"

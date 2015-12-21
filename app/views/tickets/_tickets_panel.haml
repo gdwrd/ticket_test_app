@@ -13,6 +13,6 @@
               %small= item.title
             %td.actions= link_to 'Show', item, class: 'btn btn-xs btn-info'
             - if item.user.nil?
-              %td.actions= button_to "Assign", update_ticket_status_path(item.id, 2), method: :patch, class: 'btn btn-xs btn-success'
+              %td.actions= button_to "Assign", update_ticket_status_path(item.slug, 2), method: :patch, class: 'btn btn-xs btn-success'
             - else
-              %td.actions= button_to "Unassign", update_ticket_status_path(item.id, 1), method: :patch, class: 'btn btn-xs btn-warning'
+              %td.actions= button_to "Unassign", update_ticket_status_path(item.slug, 1), method: :patch, class: 'btn btn-xs btn-warning'

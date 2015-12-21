@@ -24,11 +24,11 @@ class TicketsResources
   end
   
   def self.get_ticket(id)
-    @ticket = Ticket.find(id)
+    @ticket = Ticket.find_by(slug: id)
   end
   
   def setup_resource(id)
-    @ticket = Ticket.find(id)
+    @ticket = Ticket.find_by(slug: id)
     @ticket_informant = @ticket.ticket_informant
   end
   
@@ -66,11 +66,11 @@ class TicketsResources
   def assign_to_current_user(user_id)
     @ticket.user_id = user_id
   end
-  
+
   def set_default_status
     @ticket.status = 1
   end
-  
+
   def generate_name_attribute
     loop do
       @ticket.name = "#{rand_str}-#{rand_hex}-#{rand_str}-#{rand_hex}-#{rand_str}-#{rand_hex}"
