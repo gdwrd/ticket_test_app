@@ -1,28 +1,29 @@
-%h2 Last added tickets
-%br
-.panel.panel-default
-  .panel-heading
-    %h4 Recent Tickets
-  %table.table.table-hover
-    - @recent.each do |item|
-      %tr
-        %td
-          = item.name
-        %td
-          = item.title
-        %td.actions
-          = link_to 'Show', item, class: 'btn btn-xs btn-info'
+.col-md-8.col-md-offset-2.col-xs-12
+  %h2 Last added tickets
+  %br
+  .panel.panel-default
+    .panel-heading
+      %h4 Recent Tickets
+    %table.table.table-hover
+      - @recent.each do |item|
+        %tr
+          %td
+            = item.name
+          %td
+            = item.title
+          %td.actions
+            = link_to 'Show', item, class: 'btn btn-xs btn-info'
 
-.panel.panel-default
-  .panel-heading
-    %h4 Last Updated
-  %table.table.table-hover
-    - @updated.each do |item|
-      %tr
-        %td
-          = item.name
-        %td
-          = item.title
-        %td.actions
-          = link_to 'Show', item, class: 'btn btn-xs btn-info'
+  .panel.panel-default
+    .panel-heading
+      %h4 Last Updated
+    %table.table.table-hover
+      - @updated.each do |item|
+        %tr
+          %td
+            = item.name
+          %td
+            = item.title
+          %td.actions
+            = link_to 'Show', item, class: 'btn btn-xs btn-info'
 
