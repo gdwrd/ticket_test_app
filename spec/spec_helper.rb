@@ -1,7 +1,10 @@
 require 'simplecov'
 require 'capybara/rspec'
 
-SimpleCov.start 'rails'
+SimpleCov.start 'rails' do
+  add_group 'Resources', "app/resources"
+  add_group 'Forms', "app/forms"
+end
 
 RSpec.configure do |config|
   
