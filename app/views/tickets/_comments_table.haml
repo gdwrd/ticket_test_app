@@ -1,0 +1,8 @@
+%table.table.table-hover
+  - if !@ticket.comments.blank?
+    - @ticket.comments.each do |item|
+      %tr
+        %td= item.message
+        %td= item.created_at
+  - else
+    %h5.text-center No comments yet!
