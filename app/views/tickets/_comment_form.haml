@@ -1,0 +1,5 @@
+= form_for @comment, url: new_comments_path(@ticket.slug) do |f|
+  .form-group
+    = f.text_area :message, class: 'form-control', placeholder: 'Type comment here..'
+  .form-group
+    = f.submit 'Add Comment', class: 'btn btn-success'

@@ -9,5 +9,11 @@
           = @ticket.title
         %p
           = @ticket.description
+    .panel.panel-info
+      .panel-heading
+        %h5 Comments
+      .panel-body
+        = new_comment_form
+      = comments_table
   .col-md-4.col-xs-12
     = user_actions
